@@ -4,63 +4,45 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>@Html.DisplayFor(model => model.Name)</h2>
+<div class="row">
+    <div class="col-md-6">
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ReleaseDate)
+            </dt>
 
-<div>
-    <h4>VideoGame</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ReleaseDate)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Developer)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ReleaseDate)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Developer)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ReleaseDate)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Publisher)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ReleaseYear)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Publisher)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ReleaseYear)
-        </dd>
+        </dl>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Developer)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Developer)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Publisher)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Publisher)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.YouTubeEmbedLink)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.YouTubeEmbedLink)
-        </dd>
-
-    </dl>
+    <div class="col-md-6">
+        <iframe width="560" height="315" src="@Html.DisplayFor(model => model.YouTubeEmbedLink)" frameborder="0" allowfullscreen></iframe>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<div class="form-group">
+    <input type="button" value="Back" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "VideoGames")'" />
+    <input type="button" value="Edit" class="btn btn-warning" onclick="location.href='@Url.Action("Edit", "VideoGames", new { id = Model.Id })'" />
+    <input type="button" value="Delete" class="btn btn-danger" onclick="location.href='@Url.Action("Delete", "VideoGames", new { id = Model.Id })'" />
+</div>
