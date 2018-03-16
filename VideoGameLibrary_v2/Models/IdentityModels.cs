@@ -16,12 +16,16 @@ namespace VideoGameLibrary_v2.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int Age { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("VideoGameLibrary_local", throwIfV1Schema: false)
         {
         }
 
@@ -29,5 +33,8 @@ namespace VideoGameLibrary_v2.Models
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<VideoGame> VideoGames { get; set; }
+        public DbSet<Review> Reviews { get; set; }
     }
 }

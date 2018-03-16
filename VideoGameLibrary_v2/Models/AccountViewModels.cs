@@ -79,6 +79,18 @@ namespace VideoGameLibrary_v2.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        [Required]
+        [Range(1, 120, ErrorMessage = "Age must be between 1 and 120 years")]
+        public int Age { get; set; }
     }
 
     public class ResetPasswordViewModel
