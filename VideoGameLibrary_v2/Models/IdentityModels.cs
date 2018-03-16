@@ -25,7 +25,7 @@ namespace VideoGameLibrary_v2.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("VideoGameLibrary_local", throwIfV1Schema: false)
+            : base("VideoGameLibrary_remote", throwIfV1Schema: false)
         {
         }
 
