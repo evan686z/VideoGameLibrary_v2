@@ -46,6 +46,14 @@ a, a:hover, a:active, a:focus, a:link {
     background-color: #2A9FD6;
 }
 
+.align-left {
+    float: left;
+}
+
+li.menu-item {
+    margin: 0 10px 0 0;
+}
+
 /*.navbar-toggle {
     position: relative;
     float: right;
