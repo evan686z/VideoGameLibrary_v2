@@ -1,0 +1,26 @@
+﻿@model IEnumerable<VideoGameLibrary_v2.Models.Review>
+
+@{
+    ViewBag.Title = "Video Game Reviews";
+
+    var videoGame = (VideoGameLibrary_v2.Models.VideoGame)ViewBag.VideoGame;
+}
+
+<h2>Video Game Reviews for @videoGame.Name</h2>
+
+<table class="table">
+    @foreach (var review in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => review.DateCreated) <br />
+                @Html.DisplayFor(modelItem => review.Content) <br />
+            </td>
+        </tr>
+    }
+</table>
+
+<div class="form-group">
+    <input type="button" value="Back to List" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "VideoGames")'" />
+</div>
+

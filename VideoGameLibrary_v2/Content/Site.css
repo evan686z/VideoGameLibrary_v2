@@ -21,6 +21,9 @@ input,
 select,
 textarea {
     max-width: 280px;
+    color: white;
+    background-color: #2A9FD6;
+    border: none;
 }
 
 .color-white {
@@ -52,6 +55,23 @@ a, a:hover, a:active, a:focus, a:link {
 
 li.menu-item {
     margin: 0 10px 0 0;
+}
+
+.marginBtn{
+    margin-bottom: 10px;
+}
+
+.FilterSearch{
+    display: none;
+}
+
+/*Hamburger menu button*/
+
+.divHam {
+    width: 35px;
+    height: 5px;
+    background-color: white;
+    margin: 6px 0;
 }
 
 /*.navbar-toggle {

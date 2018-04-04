@@ -192,6 +192,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ReviewsController.cs" />
     <Compile Include="Controllers\VideoGamesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -203,6 +204,14 @@
     <Compile Include="Migrations\201803161544101_userModel.cs" />
     <Compile Include="Migrations\201803161544101_userModel.Designer.cs">
       <DependentUpon>201803161544101_userModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804031736297_reviewModel.cs" />
+    <Compile Include="Migrations\201804031736297_reviewModel.Designer.cs">
+      <DependentUpon>201804031736297_reviewModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804031856223_review+reviewViewModel.cs" />
+    <Compile Include="Migrations\201804031856223_review+reviewViewModel.Designer.cs">
+      <DependentUpon>201804031856223_review+reviewViewModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -230,6 +239,7 @@
     <Content Include="ClassDiagram.cd" />
     <None Include="Properties\PublishProfiles\GameTopia - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\CustomScripts.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -277,6 +287,13 @@
     <Content Include="Views\VideoGames\Details.cshtml" />
     <Content Include="Views\VideoGames\Edit.cshtml" />
     <Content Include="Views\VideoGames\Index.cshtml" />
+    <Content Include="Views\Home\Admin.cshtml" />
+    <Content Include="Views\Reviews\Create.cshtml" />
+    <Content Include="Views\Reviews\Delete.cshtml" />
+    <Content Include="Views\Reviews\Details.cshtml" />
+    <Content Include="Views\Reviews\Edit.cshtml" />
+    <Content Include="Views\Reviews\Index.cshtml" />
+    <Content Include="Views\Reviews\ListOfReviewsByVideoGame.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -300,6 +317,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803161544101_userModel.resx">
       <DependentUpon>201803161544101_userModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804031736297_reviewModel.resx">
+      <DependentUpon>201804031736297_reviewModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804031856223_review+reviewViewModel.resx">
+      <DependentUpon>201804031856223_review+reviewViewModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

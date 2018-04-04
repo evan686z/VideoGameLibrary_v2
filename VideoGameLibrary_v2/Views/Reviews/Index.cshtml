@@ -1,0 +1,42 @@
+﻿@model IEnumerable<VideoGameLibrary_v2.Models.VideoGameReviewViewModel>
+
+@{
+    ViewBag.Title = "Video Game Review Administration";
+}
+
+<h2>Review Management</h2>
+
+<div class="form-group">
+    <input type="button" value="Create" onclick="location.href='@Url.Action("Create", "Reviews")'" class="btn btn-primary" />
+</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.VideoGameName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </th>
+        <th>
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.VideoGameName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCreated)
+            </td>
+            <td>
+                <div class="form-group">
+                    <input type="button" value="Details" class="btn btn-info" onclick="location.href='@Url.Action("Details", "Reviews", new { id = item.Id })'" />
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>

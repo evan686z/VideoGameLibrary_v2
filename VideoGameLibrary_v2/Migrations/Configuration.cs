@@ -25,21 +25,12 @@ namespace VideoGameLibrary_v2.Migrations
             //context.VideoGames.AddOrUpdate(v => v.Name,
             //new Models.VideoGame()
             //{
-            //    Name = "Metal Gear Solid V: The Phantom Pain",
-            //    ReleaseDate = "September 1, 2015",
-            //    ReleaseYear = "2015",
-            //    Developer = "Kojima Productions",
-            //    Publisher = "Konami",
-            //    YouTubeEmbedLink = ""
-            //},
-            //new Models.VideoGame()
-            //{
             //    Name = "The Legend of Zelda: Breath of the Wild",
             //    ReleaseDate = "March 3, 2017",
             //    ReleaseYear = "2017",
             //    Developer = "Nintendo",
             //    Publisher = "Nintendo",
-            //    YouTubeEmbedLink = ""
+            //    YouTubeEmbedLink = "https://www.youtube.com/embed/1rPxiXXxftE"
             //},
             //new Models.VideoGame()
             //{
@@ -48,7 +39,7 @@ namespace VideoGameLibrary_v2.Migrations
             //    ReleaseYear = "2017",
             //    Developer = "Nintendo",
             //    Publisher = "Nintendo",
-            //    YouTubeEmbedLink = ""
+            //    YouTubeEmbedLink = "https://www.youtube.com/embed/wGQHQc_3ycE"
             //},
             //new Models.VideoGame()
             //{
@@ -57,7 +48,7 @@ namespace VideoGameLibrary_v2.Migrations
             //    ReleaseYear = "2017",
             //    Developer = "Guerrilla Games",
             //    Publisher = "Sony Interactive Entertainment",
-            //    YouTubeEmbedLink = ""
+            //    YouTubeEmbedLink = "https://www.youtube.com/embed/wzx96gYA8ek"
             //},
             //new Models.VideoGame()
             //{
@@ -66,16 +57,7 @@ namespace VideoGameLibrary_v2.Migrations
             //    ReleaseYear = "2018",
             //    Developer = "Capcom",
             //    Publisher = "Capcom",
-            //    YouTubeEmbedLink = ""
-            //},
-            //new Models.VideoGame()
-            //{
-            //    Name = "Nier: Automata",
-            //    ReleaseDate = "February 23, 2017",
-            //    ReleaseYear = "2017",
-            //    Developer = "PlatinumGames",
-            //    Publisher = "Square Enix",
-            //    YouTubeEmbedLink = ""
+            //    YouTubeEmbedLink = "https://www.youtube.com/embed/OotQrKEqe94"
             //},
             //new Models.VideoGame()
             //{
@@ -84,7 +66,7 @@ namespace VideoGameLibrary_v2.Migrations
             //    ReleaseYear = "2016",
             //    Developer = "Blizzard Entertainment",
             //    Publisher = "Blizzard Entertainment",
-            //    YouTubeEmbedLink = ""
+            //    YouTubeEmbedLink = "https://www.youtube.com/embed/FqnKB22pOC0"
             //},
             //new Models.VideoGame()
             //{

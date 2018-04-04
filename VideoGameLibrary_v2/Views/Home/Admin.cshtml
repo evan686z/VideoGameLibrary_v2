@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "Admin";
+}
+
+<h2>Application Administration</h2>
+
+<ul>
+    <li>@Html.ActionLink("Manage Video Games", "Index", "VideoGames", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "linkClean" })</li>
+    <li>@Html.ActionLink("Manage Reviews", "Index", "Reviews", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "linkClean" })</li>
+</ul>
+
