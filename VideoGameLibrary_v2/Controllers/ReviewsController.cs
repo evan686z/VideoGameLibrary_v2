@@ -36,6 +36,27 @@ namespace VideoGameLibrary_v2.Controllers
             return View(videoGameReviewViewModel);
         }
 
+        // GET: user create video game review
+        public ActionResult UserCreate()
+        {
+            return View();
+        }
+
+        // POST: user create video game review
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UserCreate([Bind(Include = "Id,DateCreated,Content,VideoGameId")] Review review)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Reviews.Add(review);
+                db.SaveChanges();
+                return RedirectToAction("ListOfReviewsByVideoGame", new { id = review.VideoGameId});
+            }
+
+            return View(review);
+        }
+
         // GET: Reviews/Create
         public ActionResult Create()
         {
