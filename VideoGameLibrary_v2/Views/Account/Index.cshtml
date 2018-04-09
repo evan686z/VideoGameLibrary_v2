@@ -4,11 +4,12 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>User Management</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div class="form-group">
+    <input type="button" value="Add New" onclick="location.href='@Url.Action("Create", "Account")'" class="btn btn-success" />
+</div>
+
 <table class="table">
     <tr>
         <th>
@@ -43,7 +44,8 @@
         <td>
             @Html.ActionLink("Edit", "Edit", new { userName = item.UserName }) |
             @Html.ActionLink("Details", "Details", new { userName = item.UserName }) |
-            @Html.ActionLink("Delete", "Delete", new { userName = item.UserName })
+            @Html.ActionLink("Delete", "Delete", new { userName = item.UserName }) |
+            @Html.ActionLink("Roles", "ViewUsersRoles", new { userName = item.UserName})
         </td>
     </tr>
 }

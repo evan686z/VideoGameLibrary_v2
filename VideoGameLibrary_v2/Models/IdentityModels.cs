@@ -37,6 +37,8 @@ namespace VideoGameLibrary_v2.Models
         public DbSet<VideoGame> VideoGames { get; set; }
         public DbSet<Review> Reviews { get; set; }
 
+        public System.Data.Entity.DbSet<VideoGameLibrary_v2.Models.RoleViewModel> RoleViewModels { get; set; }
+
         //public System.Data.Entity.DbSet<VideoGameLibrary_v2.Models.CreateUserViewModel> CreateUserViewModels { get; set; }
 
         //public System.Data.Entity.DbSet<VideoGameLibrary_v2.Models.EditUserViewModel> EditUserViewModels { get; set; }

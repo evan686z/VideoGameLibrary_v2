@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Roles by User";
+    string userName = ViewBag.UserName;
+}
+
+<h2>Roles by User</h2>
+<h5>User: @ViewBag.UserName</h5>
+
+<div class="form-group">
+    <input type="button" value="Add New" onclick="location.href='@Url.Action("AddRoleToUser", "Account", new { userName = userName})'" class="btn btn-success" />
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            User Role
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var role in ViewBag.RolesForUser)
+    {
+        <tr>
+            <td>
+                @role
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "DeleteRoleForUser", new { userName = userName, roleName = role })
+            </td>
+        </tr>
+    }
+</table>
+

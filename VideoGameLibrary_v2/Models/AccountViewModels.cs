@@ -186,4 +186,16 @@ namespace VideoGameLibrary_v2.Models
 
         public int Age { get; set; }
     }
+
+    public class RoleViewModel
+    {
+        public RoleViewModel() { }
+
+        [Key]
+        public int Id { get; set; }
+
+        [Required]
+        [Display(Name = "Role Name")]
+        public string Name { get; set; }
+    }
 }
