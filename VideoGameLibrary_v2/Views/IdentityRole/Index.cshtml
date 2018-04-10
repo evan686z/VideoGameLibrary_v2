@@ -6,9 +6,9 @@
 
 <h2>User Role Administration</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div class="form-group">
+    <input type="button" value="Add New" onclick="location.href='@Url.Action("Create", "IdentityRole")'" class="btn btn-success" />
+</div>
 <table class="table">
     <tr>
         <th>
@@ -23,9 +23,9 @@
             @Html.DisplayFor(modelItem => role.Name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=role.Id }) |
-            @Html.ActionLink("Details", "Details", new { id= role.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id= role.Id })
+            <div class="form-group">
+                <input type="button" value="Details" class="btn btn-info" onclick="location.href='@Url.Action("Details", "IdentityRole", new { id = role.Id })'" />
+            </div>
         </td>
     </tr>
 }

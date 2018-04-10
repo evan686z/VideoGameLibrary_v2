@@ -69,25 +69,44 @@ namespace VideoGameLibrary_v2.Controllers
         // POST: Users/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserName,LastName,FirstName,Email,Age")] CreateUserViewModel user)
+        public async Task<ActionResult> Create(CreateUserViewModel model)
         {
-            var db = new ApplicationDbContext();
 
             if (ModelState.IsValid)
             {
-                var newUser = new ApplicationUser();
-
-                newUser.UserName = user.UserName;
-                newUser.FirstName = user.FirstName;
-                newUser.LastName = user.LastName;
-                newUser.Email = user.Email;
-                newUser.Age = user.Age;
-
-                db.Users.Add(newUser);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, Age = model.Age };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+                AddErrors(result);
             }
-            return View(user);
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+
+
+
+            //var db = new ApplicationDbContext();
+
+            //if (ModelState.IsValid)
+            //{
+            //    var newUser = new ApplicationUser();
+
+            //    newUser.UserName = model.UserName;
+            //    newUser.FirstName = model.FirstName;
+            //    newUser.LastName = model.LastName;
+            //    newUser.Email = model.Email;
+            //    newUser.Password = model.Password;
+            //    newUser.ConfirmPassword = model.ConfirmPassword;
+            //    newUser.Age = model.Age;
+
+            //    db.Users.Add(newUser);
+            //    db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
+            //return View(model);
         }
 
         // GET: Users/Edit
@@ -112,8 +131,9 @@ namespace VideoGameLibrary_v2.Controllers
         // POST: User/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserName,LastName,FirstName,Email,Age")]EditUserViewModel userModel)
+        public ActionResult Edit([Bind(Include = "UserName,LastName,FirstName,Email,Password,ConfirmPassword,Age")]EditUserViewModel userModel)
         {
+
             if (ModelState.IsValid)
             {
                 var db = new ApplicationDbContext();
@@ -122,6 +142,8 @@ namespace VideoGameLibrary_v2.Controllers
                 user.FirstName = userModel.FirstName;
                 user.LastName = userModel.LastName;
                 user.Email = userModel.Email;
+                //user.Password = userModel.Password;
+                //user.ConfirmPassword = userModel.ConfirmPassword;
 
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();

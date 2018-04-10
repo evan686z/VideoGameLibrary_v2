@@ -124,6 +124,8 @@ namespace VideoGameLibrary_v2.Models
 
     public class EditUserViewModel
     {
+        RegisterViewModel registerUser = new RegisterViewModel();
+
         public EditUserViewModel() { }
 
         // allow initialization with an instance of ApplicationUser
@@ -134,6 +136,9 @@ namespace VideoGameLibrary_v2.Models
             this.FirstName = user.FirstName;
             this.LastName = user.LastName;
             this.Email = user.Email;
+            this.Age = user.Age;
+            this.Password = registerUser.Password;
+            this.ConfirmPassword = registerUser.ConfirmPassword;
         }
 
         [Key]
@@ -152,11 +157,24 @@ namespace VideoGameLibrary_v2.Models
         [Required]
         public string Email { get; set; }
 
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
+
         public int Age { get; set; }
     }
 
     public class CreateUserViewModel
     {
+        RegisterViewModel registerUser = new RegisterViewModel();
+
         public CreateUserViewModel() { }
 
         // allow initialization with an instance of ApplicationUser
@@ -166,6 +184,9 @@ namespace VideoGameLibrary_v2.Models
             this.FirstName = user.FirstName;
             this.LastName = user.LastName;
             this.Email = user.Email;
+            this.Age = user.Age;
+            this.Password = registerUser.Password;
+            this.ConfirmPassword = registerUser.ConfirmPassword;
         }
 
         [Key]
@@ -183,6 +204,17 @@ namespace VideoGameLibrary_v2.Models
 
         [Required]
         public string Email { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
 
         public int Age { get; set; }
     }

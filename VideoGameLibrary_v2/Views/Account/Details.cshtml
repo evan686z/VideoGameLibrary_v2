@@ -42,7 +42,8 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { userName = Model.UserName }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="form-group">
+    <input type="button" value="Back" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "Account")'" />
+    <input type="button" value="Edit" class="btn btn-warning" onclick="location.href='@Url.Action("Edit", "Account", new { userName = Model.UserName })'" />
+    <input type="button" value="Delete" class="btn btn-danger" onclick="location.href='@Url.Action("Delete", "Account", new { userName = Model.UserName })'" />
+</div>

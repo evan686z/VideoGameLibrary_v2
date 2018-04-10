@@ -42,10 +42,9 @@
             @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { userName = item.UserName }) |
-            @Html.ActionLink("Details", "Details", new { userName = item.UserName }) |
-            @Html.ActionLink("Delete", "Delete", new { userName = item.UserName }) |
-            @Html.ActionLink("Roles", "ViewUsersRoles", new { userName = item.UserName})
+            <div class="form-group">
+                <input type="button" value="Details" class="btn btn-info" onclick="location.href='@Url.Action("Details", "Account", new { userName = item.UserName })'" />
+            </div>
         </td>
     </tr>
 }
