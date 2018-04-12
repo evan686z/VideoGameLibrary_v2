@@ -43,7 +43,8 @@
         </td>
         <td>
             <div class="form-group">
-                <input type="button" value="Details" class="btn btn-info" onclick="location.href='@Url.Action("Details", "Account", new { userName = item.UserName })'" />
+                <input type="button" value="Details" class="btn btn-info marginBtn" onclick="location.href='@Url.Action("Details", "Account", new { userName = item.UserName })'" />
+                <input type="button" value="Roles" class="btn btn-info marginBtn" onclick="location.href='@Url.Action("ViewUsersRoles", "Account", new { userName = item.UserName })'" />
             </div>
         </td>
     </tr>

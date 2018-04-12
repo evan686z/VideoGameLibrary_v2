@@ -24,9 +24,14 @@
                 @role
             </td>
             <td>
-                @Html.ActionLink("Delete", "DeleteRoleForUser", new { userName = userName, roleName = role })
+                <input type="button" value="Delete" class="btn btn-danger" onclick="location.href='@Url.Action("DeleteRoleForUser", "Account", new { userName = userName, roleName = role })'" />
             </td>
         </tr>
     }
 </table>
+
+<div class="form-group">
+    <input type="button" value="Back" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "Account")'" />
+</div>
+
 

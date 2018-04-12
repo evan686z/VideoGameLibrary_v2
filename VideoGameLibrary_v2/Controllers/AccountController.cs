@@ -26,12 +26,12 @@ namespace VideoGameLibrary_v2.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
         }
-        
+
         public ActionResult Index()
         {
             var users = new ApplicationDbContext().Users;
@@ -69,15 +69,19 @@ namespace VideoGameLibrary_v2.Controllers
         // POST: Users/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(CreateUserViewModel model)
+        public async Task<ActionResult> Create([Bind(Include = "UserName,FirstName,LastName,Email,Password,ConfirmPassword,Age")]CreateUserViewModel model)
         {
 
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, Age = model.Age };
-                var result = await UserManager.CreateAsync(user, model.Password);
+                var newUser = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, Age = model.Age };
+                var result = await UserManager.CreateAsync(newUser);
                 if (result.Succeeded)
                 {
+                    PasswordHasher ph = new PasswordHasher();
+                    newUser.PasswordHash = ph.HashPassword(model.Password);
+                    UserManager.AddToRole(newUser.Id, "Guest");
+
                     return RedirectToAction("Index");
                 }
                 AddErrors(result);
@@ -85,28 +89,6 @@ namespace VideoGameLibrary_v2.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
-
-
-
-            //var db = new ApplicationDbContext();
-
-            //if (ModelState.IsValid)
-            //{
-            //    var newUser = new ApplicationUser();
-
-            //    newUser.UserName = model.UserName;
-            //    newUser.FirstName = model.FirstName;
-            //    newUser.LastName = model.LastName;
-            //    newUser.Email = model.Email;
-            //    newUser.Password = model.Password;
-            //    newUser.ConfirmPassword = model.ConfirmPassword;
-            //    newUser.Age = model.Age;
-
-            //    db.Users.Add(newUser);
-            //    db.SaveChanges();
-            //    return RedirectToAction("Index");
-            //}
-            //return View(model);
         }
 
         // GET: Users/Edit
@@ -131,19 +113,25 @@ namespace VideoGameLibrary_v2.Controllers
         // POST: User/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserName,LastName,FirstName,Email,Password,ConfirmPassword,Age")]EditUserViewModel userModel)
+        public ActionResult Edit([Bind(Include = "UserName,LastName,FirstName,Email,Password,ConfirmPassword,Age")]EditUserViewModel model)
         {
-
             if (ModelState.IsValid)
             {
                 var db = new ApplicationDbContext();
-                var user = db.Users.First(u => u.UserName == userModel.UserName);
-
-                user.FirstName = userModel.FirstName;
-                user.LastName = userModel.LastName;
-                user.Email = userModel.Email;
-                //user.Password = userModel.Password;
-                //user.ConfirmPassword = userModel.ConfirmPassword;
+                var user = db.Users.First(u => u.UserName == model.UserName);
+                if (user != null)
+                {
+                    user.UserName = model.Email;
+                    user.FirstName = model.FirstName;
+                    user.LastName = model.LastName;
+                    user.Email = model.Email;
+                    user.Age = model.Age;
+                    if (model.Password != null)
+                    {
+                        PasswordHasher ph = new PasswordHasher();
+                        user.PasswordHash = ph.HashPassword(model.Password);
+                    }
+                }
 
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
@@ -151,7 +139,7 @@ namespace VideoGameLibrary_v2.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(userModel);
+            return View(model);
         }
 
         // GET: Delete
@@ -187,9 +175,9 @@ namespace VideoGameLibrary_v2.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -273,7 +261,7 @@ namespace VideoGameLibrary_v2.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -308,8 +296,8 @@ namespace VideoGameLibrary_v2.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

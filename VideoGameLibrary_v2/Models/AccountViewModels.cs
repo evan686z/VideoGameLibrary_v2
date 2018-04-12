@@ -124,7 +124,7 @@ namespace VideoGameLibrary_v2.Models
 
     public class EditUserViewModel
     {
-        RegisterViewModel registerUser = new RegisterViewModel();
+        //RegisterViewModel registerUser = new RegisterViewModel();
 
         public EditUserViewModel() { }
 
@@ -137,8 +137,7 @@ namespace VideoGameLibrary_v2.Models
             this.LastName = user.LastName;
             this.Email = user.Email;
             this.Age = user.Age;
-            this.Password = registerUser.Password;
-            this.ConfirmPassword = registerUser.ConfirmPassword;
+            this.Password = user.PasswordHash;
         }
 
         [Key]
@@ -157,7 +156,6 @@ namespace VideoGameLibrary_v2.Models
         [Required]
         public string Email { get; set; }
 
-        [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
@@ -173,7 +171,7 @@ namespace VideoGameLibrary_v2.Models
 
     public class CreateUserViewModel
     {
-        RegisterViewModel registerUser = new RegisterViewModel();
+        //RegisterViewModel registerUser = new RegisterViewModel();
 
         public CreateUserViewModel() { }
 
@@ -185,8 +183,7 @@ namespace VideoGameLibrary_v2.Models
             this.LastName = user.LastName;
             this.Email = user.Email;
             this.Age = user.Age;
-            this.Password = registerUser.Password;
-            this.ConfirmPassword = registerUser.ConfirmPassword;
+            this.Password = user.PasswordHash;
         }
 
         [Key]
