@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using VideoGameLibrary_v2.CustomAttribute;
 using VideoGameLibrary_v2.Models;
 
 namespace VideoGameLibrary_v2.Controllers
@@ -15,6 +16,7 @@ namespace VideoGameLibrary_v2.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         [HttpGet]
+        [AuthorizeOrRedirectAttribute(Roles = "Guest,Reviewer,Site Admin,Video Game Admin")]
         public ActionResult Index(string sortOrder)
         {
             ApplicationDbContext dbLocal = new ApplicationDbContext();
@@ -45,6 +47,7 @@ namespace VideoGameLibrary_v2.Controllers
         }
 
         [HttpPost]
+        [AuthorizeOrRedirectAttribute(Roles = "Guest,Reviewer,Site Admin,Video Game Admin")]
         public ActionResult Index(string searchCriteria, string yearFilter)
         {
             ApplicationDbContext dbLocal = new ApplicationDbContext();
@@ -93,6 +96,7 @@ namespace VideoGameLibrary_v2.Controllers
         }
 
         // GET: VideoGames/Details/5
+        [AuthorizeOrRedirectAttribute(Roles = "Guest,Reviewer,Site Admin,Video Game Admin")]
         public ActionResult Details(int? id)
         {
             if (id == null)

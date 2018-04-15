@@ -2,12 +2,23 @@
     ViewBag.Title = "Access Denied";
 }
 
-<h2>Access Denied</h2>
+<h2 class="text-danger">Access Denied</h2>
 
 <p class="text-warning">WARNING: You are not authorized to access this area!</p>
-<p class="text-warning">You will be redirected to the Home page in 10 seconds or <a href="@Url.Action("Index", "Home")">click here</a> now</p>
+<p class="text-warning">Please Login or Register a new account.</p>
+<p class="text-warning">You will be redirected to the Home page in <span id="countdownTimer">10</span> seconds or <a href="@Url.Action("Index", "Home")">click here</a> now</p>
 
 <script>
+    //Code Snippet Found on stackoverflow.com by user: Tom Koker
+    var timeLeft = 10;
+    var redirectTimer = setInterval(function () {
+        timeLeft--;
+        document.getElementById("countdownTimer").textContent = timeLeft;
+        if (timeLeft <= 0) {
+            clearInterval(redirectTimer);
+        }
+    }, 1000);
+
     setTimeout(function () {
         window.location.replace('@Url.Action("Index", "Home")')
     }, 10000);

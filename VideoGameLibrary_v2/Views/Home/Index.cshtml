@@ -16,8 +16,17 @@
         </p>
         <hr />
         <h2>Get Started!</h2>
-        <p>View the video game library by clicking the button below.</p>
-        <button type="button" onclick="location.href='@Url.Action("Index", "VideoGames")'" class="btn btn-primary">View Library</button>
+        @if (User.IsInRole("Site Admin") || User.IsInRole("Video Game Admin") || User.IsInRole("Reviewer") || User.IsInRole("Guest"))
+        {
+            <p>View the video game library by clicking the button below.</p>
+            <button type="button" onclick="location.href='@Url.Action("Index", "VideoGamesList")'" class="btn btn-primary">View Library</button>
+        }
+        else
+        {
+            <p>Please Login or Register to gain more access to the site</p>
+            <button type="button" onclick="location.href='@Url.Action("Register", "Account")'" class="btn btn-primary">Register</button>
+        }
+
     </div>
     <div class="col-md-2">
     </div>

@@ -22,10 +22,15 @@
 </table>
 
 <div class="form-group">
-    @if (User.IsInRole("Reviewer") || User.IsInRole("Site Admin") || User.IsInRole("Video Game Admin"))
+    @if (User.IsInRole("Site Admin") || User.IsInRole("Video Game Admin"))
     {
-        <input type="button" value="Add a Review" class="btn btn-success" onclick="location.href='@Url.Action("UserCreate", "Reviews", new { videoGameId = videoGame.Id })'" />
         <input type="button" value="Back" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "VideoGames")'" />
+        <input type="button" value="Add a Review" class="btn btn-success" onclick="location.href='@Url.Action("UserCreate", "Reviews", new { videoGameId = videoGame.Id })'" />
+    }
+    else if (User.IsInRole("Reviewer"))
+    {
+        <input type="button" value="Back" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "VideoGamesList")'" />
+        <input type="button" value="Add a Review" class="btn btn-success" onclick="location.href='@Url.Action("UserCreate", "Reviews", new { videoGameId = videoGame.Id })'" />
     }
     else
     {
