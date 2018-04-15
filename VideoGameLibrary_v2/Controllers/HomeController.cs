@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using VideoGameLibrary_v2.CustomAttribute;
 
 namespace VideoGameLibrary_v2.Controllers
 {
@@ -13,6 +14,7 @@ namespace VideoGameLibrary_v2.Controllers
             return View();
         }
 
+        [AuthorizeOrRedirectAttribute(Roles = "Site Admin, Video Game Admin")]
         public ActionResult Admin()
         {
             return View();

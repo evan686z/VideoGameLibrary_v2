@@ -3,15 +3,18 @@
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-<ul class="nav navbar-nav navbar-right">
-    <li class="menu-item">
-        @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "linkClean" })
-    </li>
-    <li><a href="javascript:document.getElementById('logoutForm').submit()" class="linkClean">Log off</a></li>
-    <li>@Html.ActionLink("Admin", "Admin", "Home", routeValues: null, htmlAttributes: new { id = "adminLink", @class = "linkClean" })</li>
-</ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="menu-item">
+                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "linkClean" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()" class="linkClean">Log off</a></li>
+            @if (User.IsInRole("Site Admin") || User.IsInRole("Video Game Admin"))
+            {
+                <li>@Html.ActionLink("Admin", "Admin", "Home", routeValues: null, htmlAttributes: new { id = "adminLink", @class = "linkClean" })</li>
+            }
+        </ul>
     }
 }
 else

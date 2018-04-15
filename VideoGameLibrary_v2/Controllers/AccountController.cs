@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using VideoGameLibrary_v2.CustomAttribute;
 using VideoGameLibrary_v2.Models;
 
 namespace VideoGameLibrary_v2.Controllers
@@ -32,6 +33,7 @@ namespace VideoGameLibrary_v2.Controllers
             SignInManager = signInManager;
         }
 
+        [AuthorizeOrRedirectAttribute(Roles = "Site Admin")]
         public ActionResult Index()
         {
             var users = new ApplicationDbContext().Users;
@@ -47,6 +49,7 @@ namespace VideoGameLibrary_v2.Controllers
         }
 
         // User/Details
+        [AuthorizeOrRedirectAttribute(Roles = "Site Admin")]
         public ActionResult Details(string userName = null)
         {
             var user = new ApplicationDbContext().Users.First(u => u.UserName == userName);
@@ -69,6 +72,7 @@ namespace VideoGameLibrary_v2.Controllers
         // POST: Users/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeOrRedirectAttribute(Roles = "Site Admin")]
         public async Task<ActionResult> Create([Bind(Include = "UserName,FirstName,LastName,Email,Password,ConfirmPassword,Age")]CreateUserViewModel model)
         {
 
@@ -92,6 +96,7 @@ namespace VideoGameLibrary_v2.Controllers
         }
 
         // GET: Users/Edit
+        [AuthorizeOrRedirectAttribute(Roles = "Site Admin")]
         public ActionResult Edit(string userName = null)
         {
             if (userName == null)
@@ -113,6 +118,7 @@ namespace VideoGameLibrary_v2.Controllers
         // POST: User/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeOrRedirectAttribute(Roles = "Site Admin")]
         public ActionResult Edit([Bind(Include = "UserName,LastName,FirstName,Email,Password,ConfirmPassword,Age")]EditUserViewModel model)
         {
             if (ModelState.IsValid)
@@ -143,6 +149,7 @@ namespace VideoGameLibrary_v2.Controllers
         }
 
         // GET: Delete
+        [AuthorizeOrRedirectAttribute(Roles = "Site Admin")]
         public ActionResult Delete(string userName = null)
         {
             var user = new ApplicationDbContext().Users.First(u => u.UserName == userName);
@@ -159,6 +166,7 @@ namespace VideoGameLibrary_v2.Controllers
         // POST: DeleteConfirm
         [ValidateAntiForgeryToken]
         [HttpPost, ActionName("Delete")]
+        [AuthorizeOrRedirectAttribute(Roles = "Site Admin")]
         public ActionResult DeleteConfirm(string userName)
         {
             var db = new ApplicationDbContext();
