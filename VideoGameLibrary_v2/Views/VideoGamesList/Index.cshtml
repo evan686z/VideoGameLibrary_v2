@@ -1,0 +1,71 @@
+﻿@model IEnumerable<VideoGameLibrary_v2.Models.VideoGame>
+
+@*@using PagedList;
+    @using PagedList.Mvc*@
+
+@{
+    ViewBag.Title = "Index";
+
+    // cast model as a PagedList to access pagination properties
+    //var pagedList = (IPagedList)Model;
+}
+<script src="~/Scripts/CustomScripts.js" type="text/javascript"></script>
+
+<h2>Video Game Library</h2>
+
+<button type="button" onclick="ShowHideInputForms('FilterSearch')" class="btn btn-primary marginBtn">&#9776</button>
+
+@using (Html.BeginForm())
+{
+    <div id="FilterSearch" class="form-horizontal">
+
+        <div class="form-group">
+            @Html.Label("Search :", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.TextBox("searchCriteria", null, new { @class = "form-control textbox-color01", @placeholder = "Enter Video Game Name Here..." })
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Filter by Year", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.DropDownList("yearFilter", new SelectList(@ViewBag.Years), "All Years", new { @class = "dropdown-item textbox-color01" })
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Search" class="btn btn-primary col-md-1 col-md-offset-2" />
+            <input type="button" value="Reset List" onclick="location.href = '@Url.Action("Index", "VideoGamesList")'" class="btn btn-primary col-md-2 col-md-offset-2" />
+        </div>
+
+    </div>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.Name).ToHtmlString(), "Index", new { sortOrder = "Name" })
+        </th>
+        <th>
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.ReleaseDate).ToHtmlString(), "Index", new { sortOrder = "ReleaseDate" })
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReleaseDate)
+            </td>
+            <td>
+                <div class="form-group">
+                    <input type="button" value="Details" class="btn btn-info" onclick="location.href='@Url.Action("Details", "VideoGamesList", new { id = item.Id })'" />
+                    <input type="button" value="Reviews" class="btn btn-info" onclick="location.href='@Url.Action("ListOfReviewsByVideoGame", "Reviews", new { id = item.Id })'" />
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>
+
+@*Page @(pagedList.PageCount < pagedList.PageNumber ? 0 : pagedList.PageNumber) of @pagedList.PageCount
+    @Html.PagedListPager(pagedList, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))*@

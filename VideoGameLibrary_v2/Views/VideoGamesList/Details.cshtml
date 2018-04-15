@@ -1,0 +1,46 @@
+﻿@model VideoGameLibrary_v2.Models.VideoGame
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@Html.DisplayFor(model => model.Name)</h2>
+<div class="row">
+    <div class="col-md-6">
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ReleaseDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ReleaseDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Developer)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Developer)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Publisher)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Publisher)
+            </dd>
+
+        </dl>
+    </div>
+
+    <div class="col-md-6">
+        <iframe width="560" height="315" src="@Html.DisplayFor(model => model.YouTubeEmbedLink)" frameborder="0" allowfullscreen></iframe>
+    </div>
+</div>
+
+<div class="form-group">
+    <input type="button" value="Back" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "VideoGamesList")'" />
+</div>

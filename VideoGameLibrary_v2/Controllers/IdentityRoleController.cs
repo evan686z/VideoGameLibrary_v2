@@ -7,6 +7,7 @@ using VideoGameLibrary_v2.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Net;
 using System.Data.Entity;
+using VideoGameLibrary_v2.CustomAttribute;
 
 namespace VideoGameLibrary_v2.Controllers
 {
@@ -15,12 +16,14 @@ namespace VideoGameLibrary_v2.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: IdentityRole
+        [AuthorizeOrRedirectAttribute(Roles = "Site Admin")]
         public ActionResult Index()
         {
             return View(db.Roles.ToList());
         }
 
         // GET: IdentityRole/Details
+        [AuthorizeOrRedirectAttribute(Roles = "Site Admin")]
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -36,6 +39,7 @@ namespace VideoGameLibrary_v2.Controllers
         }
 
         // GET IdentityRole/Create
+        [AuthorizeOrRedirectAttribute(Roles = "Site Admin")]
         public ActionResult Create()
         {
             return View();
@@ -44,6 +48,7 @@ namespace VideoGameLibrary_v2.Controllers
         // POST: IndentityRole/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeOrRedirectAttribute(Roles = "Site Admin")]
         public ActionResult Create([Bind(Include = "Id,Name")]IdentityRole role)
         {
             if (ModelState.IsValid)
@@ -56,6 +61,7 @@ namespace VideoGameLibrary_v2.Controllers
         }
 
         // GET IdentityRole/Edit
+        [AuthorizeOrRedirectAttribute(Roles = "Site Admin")]
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -74,6 +80,7 @@ namespace VideoGameLibrary_v2.Controllers
         // POST IdentityRole/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeOrRedirectAttribute(Roles = "Site Admin")]
         public ActionResult Edit([Bind(Include = "Id,Name")]IdentityRole role)
         {
             if (ModelState.IsValid)
@@ -86,6 +93,7 @@ namespace VideoGameLibrary_v2.Controllers
         }
 
         // GET IndentityRole/Delete
+        [AuthorizeOrRedirectAttribute(Roles = "Site Admin")]
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -104,6 +112,7 @@ namespace VideoGameLibrary_v2.Controllers
         // POST IdentityRole/DeleteConfirm
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [AuthorizeOrRedirectAttribute(Roles = "Site Admin")]
         public ActionResult DeleteConfirm(string id)
         {
             IdentityRole identityRoleTemp = db.Roles.Find(id);

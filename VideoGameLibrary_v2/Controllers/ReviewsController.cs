@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using VideoGameLibrary_v2.CustomAttribute;
 using VideoGameLibrary_v2.Models;
 
 namespace VideoGameLibrary_v2.Controllers
@@ -37,6 +38,7 @@ namespace VideoGameLibrary_v2.Controllers
         }
 
         // GET: user create video game review
+        [AuthorizeOrRedirectAttribute(Roles = "Site Admin,Video Game Admin,Reviewer")]
         public ActionResult UserCreate()
         {
             return View();
@@ -45,6 +47,7 @@ namespace VideoGameLibrary_v2.Controllers
         // POST: user create video game review
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeOrRedirectAttribute(Roles = "Site Admin,Video Game Admin,Reviewer")]
         public ActionResult UserCreate([Bind(Include = "Id,DateCreated,Content,VideoGameId")] Review review)
         {
             if (ModelState.IsValid)
@@ -58,6 +61,7 @@ namespace VideoGameLibrary_v2.Controllers
         }
 
         // GET: Reviews/Create
+        [AuthorizeOrRedirectAttribute(Roles = "Site Admin,Video Game Admin")]
         public ActionResult Create()
         {
             // generate select list with ids for video games dropdown
@@ -72,6 +76,7 @@ namespace VideoGameLibrary_v2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeOrRedirectAttribute(Roles = "Site Admin,Video Game Admin")]
         public ActionResult Create([Bind(Include = "Id,DateCreated,Content,VideoGameId")] Review review)
         {
             if (ModelState.IsValid)
@@ -85,6 +90,7 @@ namespace VideoGameLibrary_v2.Controllers
         }
 
         // GET: Reviews/Edit/5
+        [AuthorizeOrRedirectAttribute(Roles = "Site Admin,Video Game Admin")]
         public ActionResult Edit(int? id)
         {
             // generate select list with ids for video games dropdown
@@ -109,6 +115,7 @@ namespace VideoGameLibrary_v2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeOrRedirectAttribute(Roles = "Site Admin,Video Game Admin")]
         public ActionResult Edit([Bind(Include = "Id,DateCreated,Content,VideoGameId")] Review review)
         {
             if (ModelState.IsValid)
@@ -122,6 +129,7 @@ namespace VideoGameLibrary_v2.Controllers
         }
 
         // GET: Reviews/Delete/5
+        [AuthorizeOrRedirectAttribute(Roles = "Site Admin,Video Game Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -140,6 +148,7 @@ namespace VideoGameLibrary_v2.Controllers
         // POST: Reviews/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [AuthorizeOrRedirectAttribute(Roles = "Site Admin,Video Game Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
             Review review = db.Reviews.Find(id);

@@ -22,7 +22,14 @@
 </table>
 
 <div class="form-group">
-    <input type="button" value="Back" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "VideoGames")'" />
-    <input type="button" value="Add a Review" class="btn btn-success" onclick="location.href='@Url.Action("UserCreate", "Reviews", new { videoGameId = videoGame.Id })'" />
+    @if (User.IsInRole("Reviewer") || User.IsInRole("Site Admin") || User.IsInRole("Video Game Admin"))
+    {
+        <input type="button" value="Add a Review" class="btn btn-success" onclick="location.href='@Url.Action("UserCreate", "Reviews", new { videoGameId = videoGame.Id })'" />
+        <input type="button" value="Back" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "VideoGames")'" />
+    }
+    else
+    {
+        <input type="button" value="Back" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "VideoGamesList")'" />
+    }
 </div>
 
