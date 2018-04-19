@@ -17,7 +17,7 @@ namespace VideoGameLibrary_v2.Controllers
 
         [HttpGet]
         [AuthorizeOrRedirectAttribute(Roles = "Guest,Reviewer,Site Admin,Video Game Admin")]
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder, int? page)
         {
             ApplicationDbContext dbLocal = new ApplicationDbContext();
 
@@ -43,12 +43,17 @@ namespace VideoGameLibrary_v2.Controllers
                     break;
             }
 
+            // set parameters and paginate the video game list
+            //int pageSize = 50;
+            //int pageNumber = (page ?? 1);
+            //videoGames = videoGames.ToPagedList(pageNumber, pageSize);
+
             return View(videoGames);
         }
 
         [HttpPost]
         [AuthorizeOrRedirectAttribute(Roles = "Guest,Reviewer,Site Admin,Video Game Admin")]
-        public ActionResult Index(string searchCriteria, string yearFilter)
+        public ActionResult Index(string searchCriteria, string yearFilter, int? page)
         {
             ApplicationDbContext dbLocal = new ApplicationDbContext();
 

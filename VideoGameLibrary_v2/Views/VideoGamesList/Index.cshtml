@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<VideoGameLibrary_v2.Models.VideoGame>
 
 @*@using PagedList;
-    @using PagedList.Mvc*@
+@using PagedList.Mvc*@
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Video Game List";
 
     // cast model as a PagedList to access pagination properties
     //var pagedList = (IPagedList)Model;
@@ -68,4 +68,4 @@
 </table>
 
 @*Page @(pagedList.PageCount < pagedList.PageNumber ? 0 : pagedList.PageNumber) of @pagedList.PageCount
-    @Html.PagedListPager(pagedList, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))*@
+@Html.PagedListPager(pagedList, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))*@

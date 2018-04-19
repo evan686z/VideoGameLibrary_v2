@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Video Game Library</title>
+    <link rel="icon" type="image/x-icon" href="~/Content/Images/favicon.ico">
+    <title>@ViewBag.Title - Game Topia!</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -14,14 +15,16 @@
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand color-white" })
+                @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand color-white nav-item" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="navbar-nav mr-auto">
+                <ul class="navbar-nav nav mr-auto">
                     @if (User.IsInRole("Site Admin") || User.IsInRole("Video Game Admin") || User.IsInRole("Reviewer") || User.IsInRole("Guest"))
                     {
                         <li class="nav-item">@Html.ActionLink("Video Game List", "Index", "VideoGamesList", new { area = "" }, new { @class = "linkClean" })</li>
                     }
+                    <li class="nav-item">@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "linkClean" })</li>
+                    <li class="nav-item">@Html.ActionLink("Contact Us", "ContactUs", "Home", new { area = "" }, new { @class = "linkClean" })</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
