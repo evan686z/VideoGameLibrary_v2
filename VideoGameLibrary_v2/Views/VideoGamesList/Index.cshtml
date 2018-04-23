@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<VideoGameLibrary_v2.Models.VideoGame>
 
-@*@using PagedList;
-@using PagedList.Mvc*@
+@using PagedList;
+@using PagedList.Mvc
 
 @{
     ViewBag.Title = "Video Game List";
 
     // cast model as a PagedList to access pagination properties
-    //var pagedList = (IPagedList)Model;
+    var pagedList = (IPagedList)Model;
 }
 <script src="~/Scripts/CustomScripts.js" type="text/javascript"></script>
 
@@ -36,6 +36,10 @@
 
     </div>
 }
+
+Page @(pagedList.PageCount < pagedList.PageNumber ? 0 : pagedList.PageNumber) of @pagedList.PageCount
+@Html.PagedListPager(pagedList, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }), PagedListRenderOptions.Classic)
+
 <table class="table">
     <tr>
         <th>
@@ -66,6 +70,3 @@
     }
 
 </table>
-
-@*Page @(pagedList.PageCount < pagedList.PageNumber ? 0 : pagedList.PageNumber) of @pagedList.PageCount
-@Html.PagedListPager(pagedList, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))*@

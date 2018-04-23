@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using VideoGameLibrary_v2.CustomAttribute;
 using VideoGameLibrary_v2.Models;
+using PagedList;
 
 namespace VideoGameLibrary_v2.Controllers
 {
@@ -44,9 +45,9 @@ namespace VideoGameLibrary_v2.Controllers
             }
 
             // set parameters and paginate the video game list
-            //int pageSize = 50;
-            //int pageNumber = (page ?? 1);
-            //videoGames = videoGames.ToPagedList(pageNumber, pageSize);
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            videoGames = videoGames.ToPagedList(pageNumber, pageSize);
 
             return View(videoGames);
         }
@@ -78,6 +79,10 @@ namespace VideoGameLibrary_v2.Controllers
             {
                 videoGames = videoGames.Where(v => v.ReleaseYear == yearFilter);
             }
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            videoGames = videoGames.ToPagedList(pageNumber, pageSize);
 
             return View(videoGames);
         }
