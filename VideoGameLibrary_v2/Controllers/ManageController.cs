@@ -35,9 +35,9 @@ namespace VideoGameLibrary_v2.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -352,22 +352,30 @@ namespace VideoGameLibrary_v2.Controllers
 
         // GET: Users/Edit
         [AuthorizeOrRedirectAttribute(Roles = "Site Admin,Video Game Admin,Reviewer,Guest")]
-        public ActionResult EditProfile(string userName = null)
+        public ActionResult EditProfile(EditUserViewModel modelUser, string userName = null)
         {
-            if (userName == null)
+            if (User.Identity.GetUserName() == modelUser.UserName)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (userName == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                var user = new ApplicationDbContext().Users.First(u => u.UserName == userName);
+                var model = new EditUserViewModel(user);
+
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("AccessDenied", "Error");
             }
 
-            var user = new ApplicationDbContext().Users.First(u => u.UserName == userName);
-            var model = new EditUserViewModel(user);
-
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(model);
         }
 
         // POST: User/Edit
@@ -376,26 +384,34 @@ namespace VideoGameLibrary_v2.Controllers
         [AuthorizeOrRedirectAttribute(Roles = "Site Admin,Video Game Admin,Reviewer,Guest")]
         public ActionResult EditProfile([Bind(Include = "UserName,LastName,FirstName,Email,Age")]EditUserViewModel model)
         {
-            if (ModelState.IsValid)
+            if (User.Identity.GetUserName() == model.Email)
             {
-                var db = new ApplicationDbContext();
-                var user = db.Users.First(u => u.UserName == model.UserName);
-                if (user != null)
+                if (ModelState.IsValid)
                 {
-                    user.UserName = model.Email;
-                    user.FirstName = model.FirstName;
-                    user.LastName = model.LastName;
-                    user.Email = model.Email;
-                    user.Age = model.Age;
+                    var db = new ApplicationDbContext();
+                    var user = db.Users.First(u => u.UserName == model.UserName);
+                    if (user != null)
+                    {
+                        user.UserName = model.Email;
+                        user.FirstName = model.FirstName;
+                        user.LastName = model.LastName;
+                        user.Email = model.Email;
+                        user.Age = model.Age;
+                    }
+
+                    db.Entry(user).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    return RedirectToAction("ViewProfile");
                 }
 
-                db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
-
-                return RedirectToAction("ViewProfile");
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("AccessDenied", "Error");
             }
 
-            return View(model);
         }
         #region Helpers
         // Used for XSRF protection when adding external logins
@@ -448,6 +464,6 @@ namespace VideoGameLibrary_v2.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }
