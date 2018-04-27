@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using VideoGameLibrary_v2.CustomAttribute;
 using VideoGameLibrary_v2.Models;
 
 namespace VideoGameLibrary_v2.Controllers
@@ -333,7 +336,68 @@ namespace VideoGameLibrary_v2.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        public ActionResult ViewProfile()
+        {
+            var userName = User.Identity.GetUserName();
+            var user = new ApplicationDbContext().Users.First(u => u.UserName == userName);
+            var model = new EditUserViewModel(user);
+
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(model);
+        }
+
+        // GET: Users/Edit
+        [AuthorizeOrRedirectAttribute(Roles = "Site Admin,Video Game Admin,Reviewer,Guest")]
+        public ActionResult EditProfile(string userName = null)
+        {
+            if (userName == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var user = new ApplicationDbContext().Users.First(u => u.UserName == userName);
+            var model = new EditUserViewModel(user);
+
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(model);
+        }
+
+        // POST: User/Edit
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AuthorizeOrRedirectAttribute(Roles = "Site Admin,Video Game Admin,Reviewer,Guest")]
+        public ActionResult EditProfile([Bind(Include = "UserName,LastName,FirstName,Email,Age")]EditUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var db = new ApplicationDbContext();
+                var user = db.Users.First(u => u.UserName == model.UserName);
+                if (user != null)
+                {
+                    user.UserName = model.Email;
+                    user.FirstName = model.FirstName;
+                    user.LastName = model.LastName;
+                    user.Email = model.Email;
+                    user.Age = model.Age;
+                }
+
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("ViewProfile");
+            }
+
+            return View(model);
+        }
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
