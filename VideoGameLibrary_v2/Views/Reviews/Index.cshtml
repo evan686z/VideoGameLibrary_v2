@@ -1,7 +1,13 @@
 ﻿@model IEnumerable<VideoGameLibrary_v2.Models.VideoGameReviewViewModel>
 
+@using PagedList;
+@using PagedList.Mvc
+
 @{
     ViewBag.Title = "Video Game Review Administration";
+
+    // cast model as a PagedList to access pagination properties
+    var pagedList = (IPagedList)Model;
 }
 
 <h2>Review Management</h2>
@@ -9,6 +15,7 @@
 <div class="form-group">
     <input type="button" value="Create" onclick="location.href='@Url.Action("Create", "Reviews")'" class="btn btn-success" />
 </div>
+@Html.PagedListPager(pagedList, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
 <table class="table">
     <tr>
         <th>
@@ -40,3 +47,4 @@
     }
 
 </table>
+Page @(pagedList.PageCount < pagedList.PageNumber ? 0 : pagedList.PageNumber) of @pagedList.PageCount

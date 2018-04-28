@@ -1,17 +1,15 @@
 ﻿@model VideoGameLibrary_v2.Models.Review
 
 @{
-    ViewBag.Title = "UserCreate";
+    ViewBag.Title = "Write Review";
 }
-
-<h2>UserCreate</h2>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Review</h4>
+        <h4>Write a review</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">

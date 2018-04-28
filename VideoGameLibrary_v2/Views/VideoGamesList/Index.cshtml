@@ -37,7 +37,6 @@
     </div>
 }
 
-Page @(pagedList.PageCount < pagedList.PageNumber ? 0 : pagedList.PageNumber) of @pagedList.PageCount
 @Html.PagedListPager(pagedList, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }), PagedListRenderOptions.Classic)
 
 <table class="table">
@@ -70,3 +69,4 @@ Page @(pagedList.PageCount < pagedList.PageNumber ? 0 : pagedList.PageNumber) of
     }
 
 </table>
+Page @(pagedList.PageCount < pagedList.PageNumber ? 0 : pagedList.PageNumber) of @pagedList.PageCount

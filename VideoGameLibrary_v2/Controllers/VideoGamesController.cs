@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -17,7 +18,7 @@ namespace VideoGameLibrary_v2.Controllers
 
         [HttpGet]
         [AuthorizeOrRedirectAttribute(Roles = "Site Admin,Video Game Admin")]
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder, int? page)
         {
             ApplicationDbContext dbLocal = new ApplicationDbContext();
 
@@ -43,12 +44,16 @@ namespace VideoGameLibrary_v2.Controllers
                     break;
             }
 
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            videoGames = videoGames.ToPagedList(pageNumber, pageSize);
+
             return View(videoGames);
         }
 
         [HttpPost]
         [AuthorizeOrRedirectAttribute(Roles = "Site Admin,Video Game Admin")]
-        public ActionResult Index(string searchCriteria, string yearFilter)
+        public ActionResult Index(string searchCriteria, string yearFilter, int? page)
         {
             ApplicationDbContext dbLocal = new ApplicationDbContext();
 
@@ -73,6 +78,10 @@ namespace VideoGameLibrary_v2.Controllers
             {
                 videoGames = videoGames.Where(v => v.ReleaseYear == yearFilter);
             }
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            videoGames = videoGames.ToPagedList(pageNumber, pageSize);
 
             return View(videoGames);
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -16,9 +17,11 @@ namespace VideoGameLibrary_v2.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Reviews
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(BuildVideoGameReviewViewModelList(db.Reviews.ToList()));
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(BuildVideoGameReviewViewModelList(db.Reviews.ToList()).OrderBy(r => r.VideoGameName).ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Reviews/Details/5

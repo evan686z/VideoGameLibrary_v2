@@ -305,7 +305,7 @@ namespace VideoGameLibrary_v2.Controllers
 
                 if (result.Succeeded)
                 {
-                    UserManager.AddToRole(user.Id, "Guest");
+                    UserManager.AddToRole(user.Id, "Reviewer");
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);                    
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

@@ -30,6 +30,11 @@ h4 {
     margin-top: 10px;
 }
 
+dt,
+dd {
+    color: white;
+}
+
 .color-white {
     color: white !important;
 }
