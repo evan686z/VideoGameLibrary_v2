@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 40px;
     padding-bottom: 20px;
 }
 
@@ -111,7 +111,7 @@ li.menu-item {
 }
 
 .navbar-fixed-top {
-    top: 0;
+    top: -10px;
     z-index: 1030;
 }
 
