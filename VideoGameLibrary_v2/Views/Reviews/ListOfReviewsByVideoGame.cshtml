@@ -8,33 +8,37 @@
 
 <h2>Video Game Reviews for :</h2>
 <h4>@videoGame.Name</h4>
+<div class="container">
+    <div class="details-wrapper">
+        <div class="container">
+            <table class="table">
+                @foreach (var review in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => review.DateCreated) <br />
+                            @Html.DisplayFor(modelItem => review.Content) <br />
+                        </td>
+                    </tr>
+                }
+            </table>
 
-<table class="table">
-    @foreach (var review in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => review.DateCreated) <br />
-                @Html.DisplayFor(modelItem => review.Content) <br />
-            </td>
-        </tr>
-    }
-</table>
-
-<div class="form-group">
-    @if (User.IsInRole("Site Admin") || User.IsInRole("Video Game Admin"))
-    {
-        <input type="button" value="Back" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "VideoGames")'" />
-        <input type="button" value="Add a Review" class="btn btn-success" onclick="location.href='@Url.Action("UserCreate", "Reviews", new { videoGameId = videoGame.Id })'" />
-    }
-    else if (User.IsInRole("Reviewer"))
-    {
-        <input type="button" value="Back" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "VideoGamesList")'" />
-        <input type="button" value="Add a Review" class="btn btn-success" onclick="location.href='@Url.Action("UserCreate", "Reviews", new { videoGameId = videoGame.Id })'" />
-    }
-    else
-    {
-        <input type="button" value="Back" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "VideoGamesList")'" />
-    }
+            <div class="container">
+                @if (User.IsInRole("Site Admin") || User.IsInRole("Video Game Admin"))
+                {
+                    <input type="button" value="Back" class="btn btn-primary btn-theme" onclick="location.href='@Url.Action("Index", "VideoGames")'" />
+                    <input type="button" value="Add a Review" class="btn btn-success btn-theme" onclick="location.href='@Url.Action("UserCreate", "Reviews", new { videoGameId = videoGame.Id })'" />
+                }
+                else if (User.IsInRole("Reviewer"))
+                {
+                    <input type="button" value="Back" class="btn btn-primary btn-theme" onclick="location.href='@Url.Action("Index", "VideoGamesList")'" />
+                    <input type="button" value="Add a Review" class="btn btn-success btn-theme" onclick="location.href='@Url.Action("UserCreate", "Reviews", new { videoGameId = videoGame.Id })'" />
+                }
+                else
+                {
+                    <input type="button" value="Back" class="btn btn-primary btn-theme" onclick="location.href='@Url.Action("Index", "VideoGamesList")'" />
+                }
+            </div>
+        </div>
+    </div>
 </div>
-

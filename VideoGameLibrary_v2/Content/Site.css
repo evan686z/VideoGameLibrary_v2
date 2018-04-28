@@ -1,12 +1,12 @@
 ﻿body {
-    padding-top: 0px;
+    padding-top: 50px;
     padding-bottom: 20px;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -26,8 +26,21 @@ textarea {
     border: none;
 }
 
-h4 {
+.details-wrapper {
+    display: block;
+    margin: auto;
+    background-color: rgb(31, 31, 31);
+    box-shadow: 0 4px 12px #2A9FD6;
+}
+
+.details-padding {
+    padding: 10px, 10px, 10px, 10px;
+}
+
+h4,
+.btn {
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 dt,
@@ -81,6 +94,26 @@ li.menu-item {
 /********************************************************************/
 /* Navigation */
 /********************************************************************/
+
+.navbar-fixed-top,
+.navbar-fixed-bottom {
+    position: fixed;
+    right: 0;
+    left: 0;
+    border-width: 0 0 1px;
+}
+
+@media (min-width: 768px) {
+    .navbar-fixed-top,
+    .navbar-fixed-bottom {
+        border-radius: 0;
+    }
+}
+
+.navbar-fixed-top {
+    top: 0;
+    z-index: 1030;
+}
 
 /*Hamburger menu button*/
 
