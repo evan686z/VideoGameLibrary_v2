@@ -4,7 +4,7 @@
     ViewBag.Title = "User Roles";
 }
 
-<h2>User Role Administration</h2>
+<h2>User Role Management</h2>
 
 <div class="form-group">
     <input type="button" value="Add New" onclick="location.href='@Url.Action("Create", "IdentityRole")'" class="btn btn-success" />
@@ -31,3 +31,6 @@
 }
 
 </table>
+<div class="form-group">
+    <input type="button" value="Back" class="btn btn-primary marginTop" onclick="location.href='@Url.Action("Admin", "Home")'" />
+</div>
